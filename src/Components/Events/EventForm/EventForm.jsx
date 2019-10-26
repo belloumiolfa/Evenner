@@ -9,15 +9,28 @@ export default class EventForm extends Component {
     venue: "",
     hostedBy: ""
   };
-  handleFormSubmit = evt => {
-    evt.preventDefault();
 
+  //initialise the state with the selectedEvent
+  componentDidMount() {
+    if (this.props.selectedEvents !== null) {
+      this.setState({
+        ...this.props.selectedEvent
+      });
+    }
+  }
+
+  //submit data
+  handleFormSubmit = () => {
+    if (this.state.id) {
+      this.props.updateEvent(this.state);
+    } else {
+      this.props.createEvent(this.state);
+    }
     //lagecy form
     //console.log(this.refs.title.value);
-
-    this.props.createEvent(this.state);
   };
 
+  //add data in the inputs
   handleInputChange = ({ target: { name, value } }) => {
     this.setState({
       [name]: value
