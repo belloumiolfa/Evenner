@@ -23,27 +23,25 @@ AlertOptions.map(
       {
         key: option.key,
         text: (
-          <a href="#">
-            <Grid divided="vertically">
-              <Grid.Row>
-                <Grid.Column width={2}>
-                  <Icon
-                    circular
-                    inverted
-                    size="massive"
-                    name={option.icon}
-                    color={option.color}
-                  />
-                </Grid.Column>
-                <Grid.Column width={14}>
-                  <Header as="h5">
-                    <span color="grey">{option.description}</span> <br />
-                    <span>{option.text}</span>
-                  </Header>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </a>
+          <Grid divided="vertically">
+            <Grid.Row>
+              <Grid.Column width={2}>
+                <Icon
+                  circular
+                  inverted
+                  size="massive"
+                  name={option.icon}
+                  color={option.color}
+                />
+              </Grid.Column>
+              <Grid.Column width={14}>
+                <Header as="h5">
+                  <span color="grey">{option.description}</span> <br />
+                  <span>{option.text}</span>
+                </Header>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         )
       }
     ])
@@ -55,21 +53,19 @@ MessageOptions.map(
       {
         key: option.key,
         text: (
-          <a href="#">
-            <Grid divided="vertically">
-              <Grid.Row>
-                <Grid.Column width={2}>
-                  <Image circular src={option.img} />
-                </Grid.Column>
-                <Grid.Column width={14}>
-                  <Header as="h5">
-                    <span color="grey">{option.sendBy}</span> <br />
-                    <span>{option.text}</span>
-                  </Header>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </a>
+          <Grid divided="vertically">
+            <Grid.Row>
+              <Grid.Column width={2}>
+                <Image circular src={option.img} />
+              </Grid.Column>
+              <Grid.Column width={14}>
+                <Header as="h5">
+                  <span color="grey">{option.sendBy}</span> <br />
+                  <span>{option.text}</span>
+                </Header>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         )
       }
     ])
