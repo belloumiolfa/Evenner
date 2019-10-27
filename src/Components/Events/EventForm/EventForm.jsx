@@ -95,10 +95,16 @@ export default class EventForm extends Component {
             />
           </Form.Field>
 
-          <Button type="submit" color="green">
+          <Button type="submit" color="grey" circular>
             Submit
           </Button>
-          <Button type="button" color="grey" onClick={cancelFormOpen}>
+          <Button
+            type="button"
+            color="grey"
+            onClick={cancelFormOpen}
+            basic
+            circular
+          >
             Cancel
           </Button>
         </Form>

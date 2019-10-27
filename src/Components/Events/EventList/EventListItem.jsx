@@ -36,17 +36,19 @@ export default class EventListItem extends Component {
         <Segment clearing>
           <span>{event.description}</span>
           <Button
-            as="a"
-            color="grey"
+            size="large"
+            circular
+            icon="eye dropper"
+            basic
             floated="right"
-            content="View"
             onClick={() => selectedEvent(event)}
           />
           <Button
-            as="a"
-            color="grey"
+            size="large"
+            circular
+            icon="trash alternate"
+            basic
             floated="right"
-            content="Delete"
             onClick={() => deletEvent(event.id)}
           />
         </Segment>

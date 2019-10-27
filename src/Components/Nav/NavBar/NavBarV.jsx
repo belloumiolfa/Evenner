@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Menu, Header, Button, Icon } from "semantic-ui-react";
+import { Menu, Header, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 export default class NavBarV extends Component {
-  state = { activeItem: "Dashboard" };
+  state = { activeItem: "Events" };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
@@ -11,6 +12,8 @@ export default class NavBarV extends Component {
     return (
       <Menu pointing vertical>
         <Menu.Item
+          as={Link}
+          to="/"
           name="Dashboard"
           active={activeItem === "Dashboard"}
           onClick={this.handleItemClick}
@@ -23,6 +26,8 @@ export default class NavBarV extends Component {
         <Menu.Item></Menu.Item>
 
         <Menu.Item
+          as={Link}
+          to="/"
           name="Hangout Club"
           active={activeItem === "Hangout Club"}
           onClick={this.handleItemClick}
@@ -35,18 +40,22 @@ export default class NavBarV extends Component {
         <Menu.Item></Menu.Item>
 
         <Menu.Item
+          as={Link}
+          to="/events"
           name="Events"
           active={activeItem === "Events"}
           onClick={this.handleItemClick}
         >
           <Header as="h3" color="grey">
-            <Icon name="th list" size="big" />
+            <Icon name="calendar" size="big" />
             Events
           </Header>
         </Menu.Item>
         <Menu.Item></Menu.Item>
 
         <Menu.Item
+          as={Link}
+          to="/people"
           name="People"
           active={activeItem === "People"}
           onClick={this.handleItemClick}
@@ -58,13 +67,17 @@ export default class NavBarV extends Component {
         </Menu.Item>
         <Menu.Item></Menu.Item>
 
-        <Menu.Item align="center">
-          <Button icon size="huge" circular>
-            <Icon name="angle left" />
-          </Button>
-          <Button icon size="huge" circular>
-            <Icon name="angle right" />
-          </Button>
+        <Menu.Item
+          as={Link}
+          to="/creatEvent"
+          name="New Event"
+          active={activeItem === "New Event"}
+          onClick={this.handleItemClick}
+        >
+          <Header as="h3" color="grey">
+            <Icon name="add" size="big" />
+            New Event
+          </Header>
         </Menu.Item>
         <Menu.Item></Menu.Item>
       </Menu>

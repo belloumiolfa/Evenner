@@ -144,8 +144,9 @@ export default class EventDashboard extends Component {
         </Grid.Column>
         <Grid.Column width={6}>
           <Button
-            color="blue"
-            content="Create event"
+            basic
+            icon="add"
+            size="huge"
             onClick={this.handleCreateFormOpen}
           />
           {isOpen && (
