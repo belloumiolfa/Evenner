@@ -6,6 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { storeConfiguration } from "./Layout/Redux/StoreConfiguration";
+import ScrollToTop from "./ScrollToTop";
 
 //ignore the page refresh
 const rootElement = document.getElementById("root");
@@ -16,7 +17,9 @@ let render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
       </BrowserRouter>
     </Provider>,
     rootElement

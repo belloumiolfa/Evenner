@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import { Grid, Button } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 import EventList from "../EventList/EventList";
-import EventForm from "../EventForm/EventForm";
-import cuid from "cuid";
-import avartar from "../../../Images/profile1.jpg";
 import { connect } from "react-redux";
 import { createEvent, updateEvent, deleteEvent } from "../Redux/eventActions";
 
 class EventDashboard extends Component {
-  state = {
+  /*state = {
     isOpen: false,
     selectedEvent: null
-  };
+  };*/
 
   //delete an event
   handelDeletEvent = id => {
@@ -22,11 +19,10 @@ class EventDashboard extends Component {
     //delete event with redux
     this.props.deleteEvent(id);
   };
-
+  /*
   //update the event
   handleUpdateEvent = updatedEvent => {
-    /**
-     *   this.setState(({ events }) => ({
+      this.setState(({ events }) => ({
       events: events.map(event => {
         //if we have the same id we return the updeted event
         if (event.id === updatedEvent.id) {
@@ -40,26 +36,27 @@ class EventDashboard extends Component {
       isOpen: false,
       selectedEvent: null
     }));
-     */
+     
 
     //update event with redux
     this.props.updateEvent(updatedEvent);
 
     //the create button control
-    this.setState(({ events }) => ({
+     this.setState(({ events }) => ({
       isOpen: false,
       selectedEvent: null
     }));
   };
-
+*/
   //select an event
-  handleSelectEvent = event => {
+  /*handleSelectEvent = event => {
     this.setState({
       selectedEvent: event,
       isOpen: true
     });
   };
-
+*/
+  /*
   //create a new event
   handleCreateEvent = newEvent => {
     //create the new event
@@ -67,12 +64,11 @@ class EventDashboard extends Component {
     newEvent.hostPhotoURL = avartar;
 
     // add the new event in the state
-    /**
-     *  this.setState(({ events }) => ({
+      this.setState(({ events }) => ({
       events: [...events, newEvent],
       isOpen: false
     }));
-     */
+     
 
     //create new event with redux
     this.props.createEvent(newEvent);
@@ -82,7 +78,7 @@ class EventDashboard extends Component {
       isOpen: false
     }));
   };
-
+*/
   /* handleIsOpenToggele = e => {
     this.setState(({ isOpen }) => ({
       isOpen: !isOpen
@@ -90,50 +86,31 @@ class EventDashboard extends Component {
   };*/
 
   //open the create form
-  handleCreateFormOpen = () => {
+  /*handleCreateFormOpen = () => {
     this.setState({
       isOpen: true,
       selectedEvent: null
     });
-  };
+  };*/
 
   //close the create form
-  handleFormCancel = () => {
+  /*handleFormCancel = () => {
     this.setState({
       isOpen: false
     });
-  };
+  };*/
 
   render() {
-    const { isOpen, selectedEvent } = this.state;
+    // const { isOpen, selectedEvent } = this.state;
     const { events } = this.props;
-    console.log(this.props);
 
     return (
       <Grid>
         <Grid.Column width={10}>
-          <EventList
-            events={events}
-            selectedEvent={this.handleSelectEvent}
-            deletEvent={this.handelDeletEvent}
-          />
+          <EventList events={events} deletEvent={this.handelDeletEvent} />
         </Grid.Column>
         <Grid.Column width={6}>
-          <Button
-            basic
-            icon="add"
-            size="huge"
-            onClick={this.handleCreateFormOpen}
-          />
-          {isOpen && (
-            <EventForm
-              key={selectedEvent ? selectedEvent.id : 0}
-              selectedEvent={selectedEvent}
-              createEvent={this.handleCreateEvent}
-              cancelFormOpen={this.handleFormCancel}
-              updateEvent={this.handleUpdateEvent}
-            />
-          )}
+          <Header as="h1">Activity</Header>
         </Grid.Column>
       </Grid>
     );

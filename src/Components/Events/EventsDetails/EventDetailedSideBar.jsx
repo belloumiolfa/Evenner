@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Segment, Item, Label } from "semantic-ui-react";
-import user from "../../../Images/profile1.jpg";
 
 const EventDetailedSideBar = ({ attendees }) => {
   const isHost = false;
@@ -21,7 +20,7 @@ const EventDetailedSideBar = ({ attendees }) => {
         <Item.Group divided>
           {attendees &&
             attendees.map(attendee => (
-              <Item style={{ position: "relative" }}>
+              <Item key={attendee.id} style={{ position: "relative" }}>
                 {isHost && (
                   <Label
                     style={{ position: "absolute" }}
@@ -32,6 +31,7 @@ const EventDetailedSideBar = ({ attendees }) => {
                   </Label>
                 )}
                 <Item.Image size="tiny" src={attendee.photoURL} />
+
                 <Item.Content verticalAlign="middle">
                   <Item.Header as="h3">{attendee.name}</Item.Header>
                 </Item.Content>
