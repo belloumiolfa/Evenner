@@ -14,6 +14,7 @@ import PeopleDashboard from "../Components/User/PeopleDashboard/PeopleDashboard"
 import UserDetailsPage from "../Components/User/UserDetails/UserDetailsPage";
 import SettingsDashboard from "../Components/User/Settings/SettingsDashboard";
 import EventForm from "../Components/Events/EventForm/EventForm";
+import test from "../Components/testarea/test";
 
 export default class App extends Component {
   render() {
@@ -43,12 +44,13 @@ export default class App extends Component {
                     <NavBarV />
                   </Grid.Column>
                   <Grid.Column width="13">
-                    <Route path="/events" component={EventDashboard} />
+                    <Route exact path="/events" component={EventDashboard} />
                     <Route path="/events/:id" component={EventDetailsPage} />
                     <Route path="/people" component={PeopleDashboard} />
                     <Route path="/profile/:id" component={UserDetailsPage} />
                     <Route path="/settings" component={SettingsDashboard} />
                     <Route path="/creatEvent" component={EventForm} />
+                    <Route path="/test" component={test} />
                   </Grid.Column>
                 </Grid>
               </Responsive>

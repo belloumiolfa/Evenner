@@ -4,15 +4,21 @@ import "./index.css";
 import App from "./Layout/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { storeConfiguration } from "./Layout/Redux/StoreConfiguration";
 
 //ignore the page refresh
 const rootElement = document.getElementById("root");
+//the store
+const store = storeConfiguration();
 
 let render = () => {
   ReactDOM.render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>,
     rootElement
   );
 };

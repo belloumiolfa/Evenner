@@ -29,7 +29,9 @@ class NavBarH extends Component {
             Evenner
           </Header>
         </Menu.Item>
-
+        <Menu as={Link} to="/test">
+          test
+        </Menu>
         <Menu.Menu position="right">
           {auth ? (
             <SignedInMenu signOut={this.handleSignOut} />
