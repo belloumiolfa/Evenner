@@ -1,5 +1,7 @@
 import React from "react";
 import { Segment, Header, Comment, Form, Button } from "semantic-ui-react";
+
+//import components
 import user from "../../../Images/profile1.jpg";
 
 const EventDetailedChat = () => {
@@ -9,7 +11,7 @@ const EventDetailedChat = () => {
         textAlign="center"
         attached="top"
         inverted
-        color="teal"
+        color="grey"
         style={{ border: "none" }}
       >
         <Header>Chat about this event</Header>

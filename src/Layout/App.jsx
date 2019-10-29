@@ -1,13 +1,12 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
+import { Route, Switch, withRouter } from "react-router";
+import { Grid, Container } from "semantic-ui-react";
 
-import { Grid, Responsive } from "semantic-ui-react";
+//import components
 import NavBarV from "../Components/Nav/NavBar/NavBarV";
 import NavBarH from "../Components/Nav/NavBar/NavBarH";
-import NavBarVTablet from "../Components/Nav/NavBar/NavBarVTablet";
-import NavBarHTablet from "../Components/Nav/NavBar/NavBarHTablet";
 import EventDashboard from "../Components/Events/EventsDashboard/EventDashboard";
-import { Route, Switch, withRouter } from "react-router";
 import HomePage from "../Components/Home/HomePage";
 import EventDetailsPage from "../Components/Events/EventsDetails/EventDetailsPage";
 import PeopleDashboard from "../Components/User/PeopleDashboard/PeopleDashboard";
@@ -25,25 +24,13 @@ class App extends Component {
           path="/(.+)"
           render={() => (
             <Fragment>
-              <Responsive {...Responsive.onlyMobile}>Mobile</Responsive>
-              <Responsive {...Responsive.onlyTablet}>
-                <NavBarHTablet />
-                <Grid className="main">
-                  <Grid.Column width={3}>
-                    <NavBarVTablet />
-                  </Grid.Column>
-                  <Grid.Column width="13">
-                    <h1>content page </h1>
-                  </Grid.Column>
-                </Grid>
-              </Responsive>
-              <Responsive {...Responsive.onlyComputer}>
-                <NavBarH />
-                <Grid>
-                  <Grid.Column width={3}>
-                    <NavBarV />
-                  </Grid.Column>
-                  <Grid.Column width="13">
+              <NavBarH />
+              <Grid>
+                <Grid.Column width={3}>
+                  <NavBarV />
+                </Grid.Column>
+                <Grid.Column width="13">
+                  <Container>
                     <Switch key={this.props.location.key}>
                       <Route exact path="/events" component={EventDashboard} />
                       <Route path="/events/:id" component={EventDetailsPage} />
@@ -56,11 +43,9 @@ class App extends Component {
                       />
                       <Route path="/test" component={test} />
                     </Switch>
-                  </Grid.Column>
-                </Grid>
-              </Responsive>
-              <Responsive {...Responsive.onlyLargeScreen}></Responsive>
-              <Responsive {...Responsive.onlyWidescreen}></Responsive>
+                  </Container>
+                </Grid.Column>
+              </Grid>
             </Fragment>
           )}
         />

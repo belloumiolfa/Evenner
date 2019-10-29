@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
-import EventsListAttendes from "./EventsListAttendes";
 import { Link } from "react-router-dom";
+
+//import components
+import EventsListAttendes from "./EventsListAttendes";
 
 export default class EventListItem extends Component {
   render() {

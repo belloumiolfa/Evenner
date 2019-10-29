@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
+
+//import components
 import EventsDetailedHeader from "./EventsDetailedHeader";
 import EventsDetailedInfo from "./EventsDetailedInfo";
 import EventDetailedChat from "./EventDetailedChat";

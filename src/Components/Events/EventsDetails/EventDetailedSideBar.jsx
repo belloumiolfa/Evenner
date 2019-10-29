@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Segment, Item, Label } from "semantic-ui-react";
 
 const EventDetailedSideBar = ({ attendees }) => {
-  const isHost = false;
+  const isHost = true;
   return (
     <Fragment>
       <Segment
@@ -11,7 +11,7 @@ const EventDetailedSideBar = ({ attendees }) => {
         attached="top"
         secondary
         inverted
-        color="teal"
+        color="grey"
       >
         {attendees && attendees.length}
         {attendees && attendees.length === 1 ? "Person" : " People"} Going
@@ -24,7 +24,7 @@ const EventDetailedSideBar = ({ attendees }) => {
                 {isHost && (
                   <Label
                     style={{ position: "absolute" }}
-                    color="orange"
+                    color="grey"
                     ribbon="right"
                   >
                     Host

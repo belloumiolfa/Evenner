@@ -3,6 +3,8 @@ import { Menu, Header } from "semantic-ui-react";
 
 //constants
 import { Link, withRouter } from "react-router-dom";
+
+//import components
 import SignedInMenu from "../menu/SignedInMenu";
 import SignOutMenu from "../menu/SignOutMenu";
 

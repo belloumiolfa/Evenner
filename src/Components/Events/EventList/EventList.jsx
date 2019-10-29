@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+
+//import components
 import EventListItem from "./EventListItem";
 
 export default class EventList extends Component {
