@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Segment, Grid, Icon, Button } from "semantic-ui-react";
+import EventDetailedMap from "./EventDetailedMap";
 
 const EventsDetailedInfo = ({ event }) => {
+  //react hooks to use state in a statless function
+  const [isMapOpen, showMapToggele] = useState(false);
+
   return (
     <Segment.Group>
       <Segment attached="top">
@@ -39,11 +43,18 @@ const EventsDetailedInfo = ({ event }) => {
               icon="map"
               color="grey"
               size="tiny"
-              content="Show Map"
+              content={isMapOpen ? "Hide Map" : "Show Map"}
+              onClick={() => showMapToggele(!isMapOpen)}
             />
           </Grid.Column>
         </Grid>
       </Segment>
+      {isMapOpen && (
+        <EventDetailedMap
+          lat={event.venueLatLng.lat}
+          lng={event.venueLatLng.lng}
+        />
+      )}
     </Segment.Group>
   );
 };
