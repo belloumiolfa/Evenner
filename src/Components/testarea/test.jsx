@@ -1,20 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { incrementCounter, decrementCounter } from "./TestAction";
+import { incrementAsync, decrementAsync } from "./TestAction";
+
 import { Button } from "semantic-ui-react";
+
 import TestPlaceInput from "./TestPlaceInput";
 import SimpleMap from "./SimpleMap";
 
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
+import { openModal } from "../../Components/Modals/modalActions";
+
 const mapState = state => ({
-  data: state.test.data
+  data: state.test.data,
+  loading: state.async.loading,
+  buttonName: state.async.elementName
 });
 
 const actions = {
-  incrementCounter,
-  decrementCounter
+  incrementAsync,
+  decrementAsync,
+  openModal
 };
 
 class test extends Component {
@@ -33,13 +40,36 @@ class test extends Component {
   };
 
   render() {
-    const { data, incrementCounter, decrementCounter } = this.props;
+    const {
+      data,
+      incrementAsync,
+      decrementAsync,
+      openModal,
+      loading,
+      buttonName
+    } = this.props;
     return (
       <div>
         <h1>test</h1>
         <h3>the answer is : {data}</h3>
-        <Button onClick={incrementCounter} positive content="increment" />
-        <Button onClick={decrementCounter} negative content="decrement" />
+        <Button
+          name="increment"
+          onClick={e => incrementAsync(e.target.name)}
+          positive
+          content="increment"
+          loading={buttonName === "increment" && loading}
+        />
+        <Button
+          name="decrement"
+          onClick={e => decrementAsync(e.target.name)}
+          negative
+          content="decrement"
+          loading={buttonName === "decrement" && loading}
+        />
+        <Button
+          onClick={() => openModal("TestModal", { data: 42 })}
+          content="open modal"
+        />
         <br />
         <br />
         <br />

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default class SignedInMenu extends Component {
   render() {
-    const { signOut } = this.props;
+    const { signOut, currentUser } = this.props;
 
     return (
       <Fragment>
@@ -24,7 +24,7 @@ export default class SignedInMenu extends Component {
         </Menu.Item>
         <Menu.Item>
           <Image avatar spaced="right" src={avatar} />
-          <Dropdown pointing="top left" text="Username">
+          <Dropdown pointing="top left" text={currentUser}>
             <Dropdown.Menu>
               <Dropdown.Item text="Create Event" icon="plus" />
               <Dropdown.Item text="My Events" icon="calendar" />

@@ -7,6 +7,8 @@ import EventList from "../EventList/EventList";
 
 //import actions
 import { createEvent, updateEvent, deleteEvent } from "../Redux/eventActions";
+import Loading from "../../../Layout/Loading";
+import EventActivity from "../EventActivity/EventActivity";
 
 class EventDashboard extends Component {
   //delete an event
@@ -15,23 +17,29 @@ class EventDashboard extends Component {
   };
 
   render() {
-    const { events } = this.props;
-
-    return (
-      <Grid>
-        <Grid.Column width={10}>
-          <EventList events={events} deletEvent={this.handelDeletEvent} />
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <Header as="h1">Activity</Header>
-        </Grid.Column>
-      </Grid>
-    );
+    const { events, loading } = this.props;
+    if (loading) {
+      return <Loading />;
+    } else {
+      return (
+        <Grid>
+          <Grid.Column width={10}>
+            <EventList events={events} deletEvent={this.handelDeletEvent} />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <Header as="h1">
+              <EventActivity />
+            </Header>
+          </Grid.Column>
+        </Grid>
+      );
+    }
   }
 }
 //connect the state
 const mapState = state => ({
-  events: state.events
+  events: state.events,
+  loading: state.async.loading
 });
 
 //connect actions

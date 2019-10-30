@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 //import components
 import EventsListAttendes from "./EventsListAttendes";
+import { format, parseISO } from "date-fns/esm";
 
 export default class EventListItem extends Component {
   render() {
@@ -24,7 +25,9 @@ export default class EventListItem extends Component {
         <Segment>
           <span>
             <Icon color="grey" name="clock" />
-            {event.date} | <Icon color="grey" name="marker" />
+            {format(parseISO(event.date), "EEEE do LLL")} at{" "}
+            {format(parseISO(event.date), "h:mm a")} |{" "}
+            <Icon color="grey" name="marker" />
             {event.venue}
           </span>
         </Segment>

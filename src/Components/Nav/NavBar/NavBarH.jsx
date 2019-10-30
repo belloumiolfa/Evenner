@@ -1,29 +1,34 @@
 import React, { Component } from "react";
 import { Menu, Header } from "semantic-ui-react";
-
+import { connect } from "react-redux";
 //constants
 import { Link, withRouter } from "react-router-dom";
 
 //import components
 import SignedInMenu from "../menu/SignedInMenu";
 import SignOutMenu from "../menu/SignOutMenu";
+import { openModal } from "../../Modals/modalActions";
+import { signOut } from "../../Authentification/authActions";
 
 class NavBarH extends Component {
-  state = {
-    auth: true
-  };
   //sign in
-  handleSignIn = () => this.setState({ auth: true });
+  handleSignIn = () => {
+    this.props.openModal("SignInModal");
+  };
+
+  handleRegister = () => {
+    this.props.openModal("RegisterModal");
+  };
 
   //sign out
   handleSignOut = () => {
-    this.setState({ auth: false });
+    this.props.signOut();
     this.props.history.push("/");
   };
 
   render() {
-    const { auth } = this.state;
-
+    const { auth } = this.props;
+    const authenticated = auth.authentification;
     return (
       <Menu pointing secondary>
         <Menu.Item as={Link} to="/">
@@ -35,14 +40,35 @@ class NavBarH extends Component {
           test
         </Menu>
         <Menu.Menu position="right">
-          {auth ? (
-            <SignedInMenu signOut={this.handleSignOut} />
+          {authenticated ? (
+            <SignedInMenu
+              signOut={this.handleSignOut}
+              currentUser={auth.currentUser}
+            />
           ) : (
-            <SignOutMenu signIn={this.handleSignIn} />
+            <SignOutMenu
+              signIn={this.handleSignIn}
+              register={this.handleRegister}
+            />
           )}
         </Menu.Menu>
       </Menu>
     );
   }
 }
-export default withRouter(NavBarH);
+
+const mapState = state => ({
+  auth: state.auth
+});
+
+const actions = {
+  openModal,
+  signOut
+};
+
+export default withRouter(
+  connect(
+    mapState,
+    actions
+  )(NavBarH)
+);
