@@ -50,6 +50,7 @@ class EventForm extends Component {
     cityLatLng: {},
     venueLatLng: {}
   };
+
   //submit data
   onFormSubmit = values => {
     if (this.props.initialValues.id) {
@@ -63,6 +64,8 @@ class EventForm extends Component {
         hostPhotoURL: avartar,
         hostedBy: "Bob"
       };
+      console.log(newEvent);
+
       this.props.createEvent(newEvent);
       this.props.history.push(`/events/${newEvent.id}`);
     }

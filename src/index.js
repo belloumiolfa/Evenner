@@ -12,29 +12,54 @@ import { Provider } from "react-redux";
 import { storeConfiguration } from "./Layout/Redux/StoreConfiguration";
 
 import ScrollToTop from "./ScrollToTop";
-import { loadEvents } from "./Components/Events/Redux/eventActions";
+//import { loadEvents } from "./Components/Events/Redux/eventActions";
+
+//import firebase configuration
+
+import firebase from "./Config/firebase";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { createFirestoreInstance } from "redux-firestore"; // <- needed if using firestore
 
 //ignore the page refresh
 const rootElement = document.getElementById("root");
+
 //the store
 const store = storeConfiguration();
 
-store.dispatch(loadEvents());
+//fetsh data events
+//store.dispatch(loadEvents());
+
+// react-redux-firebase config
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+  attachAuthIsReady: true
+  // enableClaims: true // Get custom claims along with the profile
+};
+
+const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance // <- needed if using firestore
+};
 
 let render = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <ScrollToTop>
-          <ReduxToastr
-            position="bottom-right"
-            transitionIn="fadeIn"
-            transitionOut="fadeOut"
-          />
-          <App />
-        </ScrollToTop>
-      </BrowserRouter>
-    </Provider>,
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <ScrollToTop>
+            <ReduxToastr
+              position="bottom-right"
+              transitionIn="fadeIn"
+              transitionOut="fadeOut"
+            />
+            <App />
+          </ScrollToTop>
+        </BrowserRouter>
+      </Provider>
+    </ReactReduxFirebaseProvider>,
     rootElement
   );
 };

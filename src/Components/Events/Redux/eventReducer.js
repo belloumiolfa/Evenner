@@ -3,7 +3,7 @@ import {
   CREATE_EVENT,
   UPDATE_EVENT,
   DELETE_EVENT,
-  FETCH_EVENT
+  FETCH_EVENTS
 } from "./EventsConstants";
 
 const initialState = [];
@@ -31,5 +31,5 @@ export default createRducer(initialState, {
   [CREATE_EVENT]: createEvent,
   [UPDATE_EVENT]: updateEvent,
   [DELETE_EVENT]: deleteEvent,
-  [FETCH_EVENT]: fetchEvents
+  [FETCH_EVENTS]: fetchEvents
 });

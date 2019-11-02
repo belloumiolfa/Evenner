@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import { reducer as FormReducer } from "redux-form";
 import { reducer as ToastrReducer } from "react-redux-toastr";
+import { firebaseReducer } from "react-redux-firebase";
+import { firestoreReducer } from "redux-firestore";
 
 //import reducers
 import testReducer from "../../Components/testarea/testReducer";
@@ -10,6 +12,8 @@ import authReducer from "../../Components/Authentification/authReducer";
 import asyncReducer from "../../Components/Async/asyncReducer";
 
 const rootReducer = combineReducers({
+  firebase: firebaseReducer,
+  firestore: firestoreReducer,
   form: FormReducer,
   test: testReducer,
   events: eventReducer,

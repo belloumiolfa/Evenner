@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Segment, Grid, Icon, Button } from "semantic-ui-react";
 import EventDetailedMap from "./EventDetailedMap";
-import { format } from "date-fns/esm";
-import { parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const EventsDetailedInfo = ({ event }) => {
   //react hooks to use state in a statless function
@@ -26,10 +25,12 @@ const EventsDetailedInfo = ({ event }) => {
             <Icon name="calendar" size="large" color="grey" />
           </Grid.Column>
           <Grid.Column width={15}>
-            <span>
-              {format(parseISO(event.date), "EEEE do LLL")} at{" "}
-              {format(parseISO(event.date), "h:mm a")} |{" "}
-            </span>
+            {event.date && (
+              <span>
+                {format(parseISO(event.date), "EEEE do LLL")} at{" "}
+                {format(parseISO(event.date), "h:mm a")}
+              </span>
+            )}
           </Grid.Column>
         </Grid>
       </Segment>

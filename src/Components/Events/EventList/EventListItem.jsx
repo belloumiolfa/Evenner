@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 
 //import components
 import EventsListAttendes from "./EventsListAttendes";
-import { format, parseISO } from "date-fns/esm";
+import { format } from "date-fns";
 
 export default class EventListItem extends Component {
   render() {
     const { event, deletEvent } = this.props;
+
     return (
       <Segment.Group>
         <Segment>
@@ -25,8 +26,12 @@ export default class EventListItem extends Component {
         <Segment>
           <span>
             <Icon color="grey" name="clock" />
-            {format(parseISO(event.date), "EEEE do LLL")} at{" "}
-            {format(parseISO(event.date), "h:mm a")} |{" "}
+            {event.date && (
+              <span>
+                {format(event.date.toDate(), "EEEE do LLL")} at{" "}
+                {format(event.date.toDate(), "h:mm a")}
+              </span>
+            )}
             <Icon color="grey" name="marker" />
             {event.venue}
           </span>
@@ -34,8 +39,9 @@ export default class EventListItem extends Component {
         <Segment secondary>
           <List horizontal>
             {event.attendees &&
-              event.attendees.map(attendee => (
-                <EventsListAttendes key={attendee.id} attendee={attendee} />
+              //we receive an object from firestore we should conver it to ana array
+              Object.values(event.attendees).map((attendee, index) => (
+                <EventsListAttendes key={index} attendee={attendee} />
               ))}
           </List>
         </Segment>

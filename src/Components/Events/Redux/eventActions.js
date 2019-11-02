@@ -2,7 +2,7 @@ import {
   CREATE_EVENT,
   UPDATE_EVENT,
   DELETE_EVENT,
-  FETCH_EVENT
+  FETCH_EVENTS
 } from "./EventsConstants";
 import {
   asyncActionStart,
@@ -55,7 +55,7 @@ export const loadEvents = () => {
       const events = await fetchSampleData();
 
       dispatch({
-        type: FETCH_EVENT,
+        type: FETCH_EVENTS,
         payload: { events }
       });
 
