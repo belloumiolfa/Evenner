@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Menu, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
+
+//import firebe
+import { withFirebase } from "react-redux-firebase";
+
 //constants
 import { Link, withRouter } from "react-router-dom";
 
@@ -8,10 +12,9 @@ import { Link, withRouter } from "react-router-dom";
 import SignedInMenu from "../menu/SignedInMenu";
 import SignOutMenu from "../menu/SignOutMenu";
 import { openModal } from "../../Modals/modalActions";
-import { signOut } from "../../Authentification/authActions";
 
 class NavBarH extends Component {
-  //sign in
+  //open the sign in modal
   handleSignIn = () => {
     this.props.openModal("SignInModal");
   };
@@ -22,13 +25,13 @@ class NavBarH extends Component {
 
   //sign out
   handleSignOut = () => {
-    this.props.signOut();
+    this.props.firebase.logout();
     this.props.history.push("/");
   };
 
   render() {
-    const { auth } = this.props;
-    const authenticated = auth.authentification;
+    const { auth, profile } = this.props;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
     return (
       <Menu pointing secondary>
         <Menu.Item as={Link} to="/">
@@ -41,10 +44,7 @@ class NavBarH extends Component {
         </Menu>
         <Menu.Menu position="right">
           {authenticated ? (
-            <SignedInMenu
-              signOut={this.handleSignOut}
-              currentUser={auth.currentUser}
-            />
+            <SignedInMenu signOut={this.handleSignOut} profile={profile} />
           ) : (
             <SignOutMenu
               signIn={this.handleSignIn}
@@ -58,17 +58,20 @@ class NavBarH extends Component {
 }
 
 const mapState = state => ({
-  auth: state.auth
+  auth: state.firebase.auth,
+  profile: state.firebase.profile
 });
 
 const actions = {
-  openModal,
-  signOut
+  openModal
 };
 
+//connect withFirebase
 export default withRouter(
-  connect(
-    mapState,
-    actions
-  )(NavBarH)
+  withFirebase(
+    connect(
+      mapState,
+      actions
+    )(NavBarH)
+  )
 );

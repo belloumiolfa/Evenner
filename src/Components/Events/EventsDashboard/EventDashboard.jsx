@@ -53,4 +53,4 @@ const actions = {
 export default connect(
   mapState,
   actions
-)(firestoreConnect(() => [{ collection: "events" }])(EventDashboard));
+)(firestoreConnect(["events"])(EventDashboard));

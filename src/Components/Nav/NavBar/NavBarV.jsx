@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { Menu, Header, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+//import firebe
+import { withFirebase } from "react-redux-firebase";
 
 class NavBarV extends Component {
   state = { activeItem: "Events" };
@@ -10,11 +12,11 @@ class NavBarV extends Component {
   render() {
     const { activeItem } = this.state;
     const { auth } = this.props;
-    const authentification = auth.authentification;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
 
     return (
       <Menu pointing vertical>
-        {authentification && (
+        {authenticated && (
           <Menu.Item
             as={Link}
             to="/"
@@ -58,7 +60,7 @@ class NavBarV extends Component {
           </Header>
         </Menu.Item>
         <Menu.Item></Menu.Item>
-        {authentification && (
+        {authenticated && (
           <Fragment>
             <Menu.Item
               as={Link}
@@ -94,7 +96,7 @@ class NavBarV extends Component {
   }
 }
 const mapState = state => ({
-  auth: state.auth
+  auth: state.firebase.auth
 });
 
-export default connect(mapState)(NavBarV);
+export default withFirebase(connect(mapState)(NavBarV));

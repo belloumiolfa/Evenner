@@ -1,18 +1,49 @@
 import React from "react";
-import { Form, Segment, Button } from "semantic-ui-react";
+import { Form, Segment, Button, Label, Divider } from "semantic-ui-react";
 import { reduxForm, Field } from "redux-form";
-import TextInput from "../../../Layout/Redux/ReduxForm/TextInput";
+import {
+  composeValidators,
+  combineValidators,
+  isRequired,
+  hasLengthGreaterThan
+} from "revalidate";
 
-const RegisterForm = () => {
+import TextInput from "../../../Layout/Redux/ReduxForm/TextInput";
+import { connect } from "react-redux";
+import { registerUser } from "../authActions";
+import SocialSignIn from "../SocialSign/SocialSignIn";
+
+const validate = combineValidators({
+  displayName: isRequired("displayName"),
+  email: isRequired("email"),
+  password: composeValidators(
+    isRequired("password"),
+    hasLengthGreaterThan(6)({
+      message: "Description needs to be at least 5 characters"
+    })
+  )()
+});
+
+const RegisterForm = ({
+  handleSubmit,
+  registerUser,
+  error,
+  invalid,
+  submitting
+}) => {
   return (
     <div>
-      <Form size="large" autoComplete="off">
+      <Form
+        size="large"
+        autoComplete="off"
+        onSubmit={handleSubmit(registerUser)}
+      >
         <Segment>
           <Field
             name="displayName"
             type="text"
             component={TextInput}
-            placeholder="Known As"
+            placeholder="Username"
           />
           <Field
             name="email"
@@ -26,13 +57,31 @@ const RegisterForm = () => {
             component={TextInput}
             placeholder="Password"
           />
-          <Button fluid size="large" color="grey">
+          {error && (
+            <Label basic color="red">
+              {error}
+            </Label>
+          )}
+          <Button
+            fluid
+            size="large"
+            color="grey"
+            disabled={invalid || submitting}
+          >
             Register
           </Button>
+          <Divider horizontal>Or</Divider>
+          <SocialSignIn />
         </Segment>
       </Form>
     </div>
   );
 };
 
-export default reduxForm({ form: "registerForm" })(RegisterForm);
+const actions = {
+  registerUser
+};
+export default connect(
+  null,
+  actions
+)(reduxForm({ form: "registerForm", validate })(RegisterForm));

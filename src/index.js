@@ -12,28 +12,23 @@ import { Provider } from "react-redux";
 import { storeConfiguration } from "./Layout/Redux/StoreConfiguration";
 
 import ScrollToTop from "./ScrollToTop";
-//import { loadEvents } from "./Components/Events/Redux/eventActions";
 
 //import firebase configuration
-
 import firebase from "./Config/firebase";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore"; // <- needed if using firestore
-
 //ignore the page refresh
 const rootElement = document.getElementById("root");
 
 //the store
 const store = storeConfiguration();
 
-//fetsh data events
-//store.dispatch(loadEvents());
-
 // react-redux-firebase config
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
-  attachAuthIsReady: true
+  attachAuthIsReady: true,
+  updateProfileOnLogin: false
   // enableClaims: true // Get custom claims along with the profile
 };
 
@@ -69,7 +64,6 @@ if (module.hot) {
     setTimeout(render);
   });
 }
-
 render();
 
 // If you want your app to work offline and load faster, you can change
