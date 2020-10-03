@@ -13,7 +13,7 @@ import { firestoreConnect } from "react-redux-firebase";
 
 class EventDashboard extends Component {
   //delete an event
-  handelDeletEvent = id => {
+  handelDeletEvent = (id) => {
     this.props.deleteEvent(id);
   };
 
@@ -38,16 +38,16 @@ class EventDashboard extends Component {
   }
 }
 //connect the state
-const mapState = state => ({
+const mapState = (state) => ({
   events: state.firestore.ordered.events,
-  loading: state.async.loading
+  loading: state.async.loading,
 });
 
 //connect actions
 const actions = {
   createEvent,
   deleteEvent,
-  updateEvent
+  updateEvent,
 };
 
 export default connect(

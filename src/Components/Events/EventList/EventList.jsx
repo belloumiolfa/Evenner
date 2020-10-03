@@ -10,7 +10,7 @@ export default class EventList extends Component {
     return (
       <Fragment>
         {events &&
-          events.map(event => (
+          events.map((event) => (
             <EventListItem
               key={event.id}
               event={event}

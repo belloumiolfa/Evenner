@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 
 const eventImageStyle = {
-  filter: "brightness(30%)"
+  filter: "brightness(30%)",
 };
 
 const eventImageTextStyle = {
@@ -14,15 +14,15 @@ const eventImageTextStyle = {
   left: "5%",
   width: "100%",
   height: "auto",
-  color: "white"
+  color: "white",
 };
 
-const EventsDetailedHeader = ({ event }) => {
+const EventsDetailedHeader = ({ event, category }) => {
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={require(`../../../Images/${event.category}.jpg`)}
+          src={require(`../../../Images/culture.jpg`)}
           fluid
           style={eventImageStyle}
         />
@@ -31,17 +31,11 @@ const EventsDetailedHeader = ({ event }) => {
           <Item.Group>
             <Item>
               <Item.Content>
-                <Header
-                  size="huge"
-                  content={event.title}
-                  style={{ color: "white" }}
-                />
-                <p>
-                  {event.date && format(parseISO(event.date), "EEEE do LLL")}
-                </p>
+                <Header size="huge" content="ddd" style={{ color: "white" }} />
+                <p>zzzzz</p>
 
                 <p>
-                  Hosted by <strong>{event.hostedBy}</strong>
+                  Hosted by <strong>zzzzz</strong>
                 </p>
               </Item.Content>
             </Item>
@@ -63,7 +57,7 @@ const EventsDetailedHeader = ({ event }) => {
           color="grey"
           floated="right"
           as={Link}
-          to={`/manage/${event.id}`}
+          to={`/manage/ghfdtyh`}
         >
           Manage Event
         </Button>

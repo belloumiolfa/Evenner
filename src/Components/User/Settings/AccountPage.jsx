@@ -6,7 +6,7 @@ import {
   Divider,
   Label,
   Button,
-  Icon
+  Icon,
 } from "semantic-ui-react";
 import { Field, reduxForm } from "redux-form";
 import {
@@ -14,7 +14,7 @@ import {
   combineValidators,
   isRequired,
   matchesField,
-  hasLengthGreaterThan
+  hasLengthGreaterThan,
 } from "revalidate";
 
 import TextInput from "../../../Layout/Redux/ReduxForm/TextInput";
@@ -23,13 +23,13 @@ const validate = combineValidators({
   newPassword1: composeValidators(
     isRequired({ message: "The password is required." }),
     hasLengthGreaterThan(5)({
-      message: "Passwords needs to be at least 6 characters."
+      message: "Passwords needs to be at least 6 characters.",
     })
   )(),
   newPassword2: composeValidators(
     isRequired({ message: "The confirm password is required." }),
     matchesField("newPassword1")({ message: "Passwords do not match." })
-  )()
+  )(),
 });
 
 const AccountPage = ({
@@ -38,7 +38,7 @@ const AccountPage = ({
   submitting,
   handleSubmit,
   updatePassword,
-  providerId
+  providerId,
 }) => {
   return (
     <Segment>

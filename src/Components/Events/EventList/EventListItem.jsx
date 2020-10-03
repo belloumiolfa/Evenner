@@ -28,6 +28,7 @@ export default class EventListItem extends Component {
             <Icon color="grey" name="clock" />
             {event.date && (
               <span>
+                {/** it's a timestump we should converted to date */}
                 {format(event.date.toDate(), "EEEE do LLL")} at{" "}
                 {format(event.date.toDate(), "h:mm a")}
               </span>

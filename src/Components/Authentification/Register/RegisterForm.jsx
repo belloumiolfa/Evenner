@@ -5,7 +5,7 @@ import {
   composeValidators,
   combineValidators,
   isRequired,
-  hasLengthGreaterThan
+  hasLengthGreaterThan,
 } from "revalidate";
 
 import TextInput from "../../../Layout/Redux/ReduxForm/TextInput";
@@ -19,9 +19,9 @@ const validate = combineValidators({
   password: composeValidators(
     isRequired("password"),
     hasLengthGreaterThan(6)({
-      message: "Description needs to be at least 5 characters"
+      message: "Description needs to be at least 5 characters",
     })
-  )()
+  )(),
 });
 
 const RegisterForm = ({
@@ -29,7 +29,7 @@ const RegisterForm = ({
   registerUser,
   error,
   invalid,
-  submitting
+  submitting,
 }) => {
   return (
     <div>
@@ -71,7 +71,6 @@ const RegisterForm = ({
             Register
           </Button>
           <Divider horizontal>Or</Divider>
-          <SocialSignIn />
         </Segment>
       </Form>
     </div>
@@ -79,7 +78,7 @@ const RegisterForm = ({
 };
 
 const actions = {
-  registerUser
+  registerUser,
 };
 export default connect(
   null,

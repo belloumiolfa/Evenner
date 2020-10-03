@@ -4,7 +4,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateInput = (
-  { input, width, placeholder, meta: { touched, error } },
+  {
+    input: { value, onChange, onBlur },
+    showYearDropdown,
+    showMonthDropdown,
+    dropdownMode,
+    dateFormat,
+    showTimeSelect,
+    maxDate,
+    width,
+    placeholder,
+    meta: { touched, error }
+  },
   ...rest
 ) => {
   return (
@@ -12,12 +23,22 @@ const DateInput = (
       <DatePicker
         {...rest}
         placeholderText={placeholder}
-        selected={input.value ? new Date(input.value) : null}
-        dateFormat="MMMM d, yyyy h:mm aa"
-        showTimeSelect
+        selected={
+          value
+            ? Object.prototype.toString.call(value) !== "[object Date]"
+              ? value.toDate()
+              : value
+            : null
+        }
+        dateFormat={dateFormat}
+        showTimeSelect={showTimeSelect}
+        showYearDropdown={showYearDropdown}
+        showMonthDropdown={showMonthDropdown}
+        dropdownMode={dropdownMode}
+        maxDate={maxDate}
         timeFormat="HH:mm"
-        onChange={input.onChange}
-        onBlur={input.onBlur}
+        onChange={onChange}
+        onBlur={(e, value) => onBlur(value)}
         onChangeRaw={e => e.preventDefault()}
       />
       {touched && error && (

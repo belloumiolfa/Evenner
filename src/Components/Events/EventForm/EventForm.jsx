@@ -157,6 +157,8 @@ class EventForm extends Component {
                 name="date"
                 component={DateInput}
                 placeholder="Event Date"
+                dateFormat="MMMM d, yyyy h:mm aa"
+                showTimeSelect={true}
               />
 
               <Button

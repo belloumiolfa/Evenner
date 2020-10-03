@@ -17,6 +17,7 @@ import ScrollToTop from "./ScrollToTop";
 import firebase from "./Config/firebase";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore"; // <- needed if using firestore
+
 //ignore the page refresh
 const rootElement = document.getElementById("root");
 
@@ -28,7 +29,7 @@ const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
   attachAuthIsReady: true,
-  updateProfileOnLogin: false
+  updateProfileOnLogin: false,
   // enableClaims: true // Get custom claims along with the profile
 };
 
@@ -36,7 +37,7 @@ const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
-  createFirestoreInstance // <- needed if using firestore
+  createFirestoreInstance, // <- needed if using firestore
 };
 
 let render = () => {
