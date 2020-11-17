@@ -44,7 +44,11 @@ class NavBarH extends Component {
         </Menu>
         <Menu.Menu position="right">
           {authenticated ? (
-            <SignedInMenu signOut={this.handleSignOut} profile={profile} />
+            <SignedInMenu
+              auth={auth}
+              signOut={this.handleSignOut}
+              profile={profile}
+            />
           ) : (
             <SignOutMenu
               signIn={this.handleSignIn}
@@ -57,21 +61,14 @@ class NavBarH extends Component {
   }
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   auth: state.firebase.auth,
-  profile: state.firebase.profile
+  profile: state.firebase.profile,
 });
 
 const actions = {
-  openModal
+  openModal,
 };
 
 //connect withFirebase
-export default withRouter(
-  withFirebase(
-    connect(
-      mapState,
-      actions
-    )(NavBarH)
-  )
-);
+export default withRouter(withFirebase(connect(mapState, actions)(NavBarH)));

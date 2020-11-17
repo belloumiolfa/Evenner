@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Segment, Grid, Icon, Button } from "semantic-ui-react";
 import EventDetailedMap from "./EventDetailedMap";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 
 const EventsDetailedInfo = ({ event }) => {
   //react hooks to use state in a statless function
@@ -27,8 +27,8 @@ const EventsDetailedInfo = ({ event }) => {
           <Grid.Column width={15}>
             {event.date && (
               <span>
-                {format(parseISO(event.date), "EEEE do LLL")} at{" "}
-                {format(parseISO(event.date), "h:mm a")}
+                {format(event.date.toDate(), "EEEE do LLL")} at{" "}
+                {format(event.date.toDate(), "h:mm a")}
               </span>
             )}
           </Grid.Column>

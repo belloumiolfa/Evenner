@@ -11,7 +11,6 @@ import {
 import TextInput from "../../../Layout/Redux/ReduxForm/TextInput";
 import { connect } from "react-redux";
 import { registerUser } from "../authActions";
-import SocialSignIn from "../SocialSign/SocialSignIn";
 
 const validate = combineValidators({
   displayName: isRequired("displayName"),

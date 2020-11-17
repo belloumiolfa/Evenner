@@ -5,10 +5,10 @@ import { toastr } from "react-redux-toastr";
 export const signIn = (creds) => {
   return async (dispatch, getState, { getFirebase }) => {
     try {
-      const user = await getFirebase()
+      /* const user = await getFirebase()
         .auth()
         .signInWithEmailAndPassword(creds.email, creds.password);
-
+*/
       dispatch(closeModal());
     } catch (error) {
       throw new SubmissionError({ _error: error.message });

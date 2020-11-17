@@ -14,7 +14,7 @@ class CropperInput extends Component {
     }
     this.cropper.current.getCroppedCanvas().toBlob((blob) => {
       setImage(blob);
-    }, "image/jpg");
+    }, "image/jpeg");
   };
 
   render() {

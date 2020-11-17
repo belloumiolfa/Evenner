@@ -1,24 +1,45 @@
 import React, { Component } from "react";
-import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
+import { Segment, Item, Icon, List, Button, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-
-//import components
+import { objectToArray } from "../../../Layout/helpers";
 import EventsListAttendes from "./EventsListAttendes";
 import { format } from "date-fns";
+import avatar from "../../../Images/user.jpg";
 
 export default class EventListItem extends Component {
   render() {
-    const { event, deletEvent } = this.props;
+    const { event } = this.props;
 
     return (
       <Segment.Group>
         <Segment>
           <Item.Group>
             <Item>
-              <Item.Image size="tiny" circular src={event.hostPhotoURL} />
+              <Item.Image
+                size="tiny"
+                circular
+                src={event.hostPhotoURL || avatar}
+              />
               <Item.Content>
-                <Item.Header color="grey">{event.title}</Item.Header>
-                <Item.Description>Hosted by {event.hostedBy}</Item.Description>
+                <Item.Header as={Link} to={`/events/${event.id}`} color="grey">
+                  {event.title}
+                </Item.Header>
+                <Item.Description>
+                  {" "}
+                  Hosted by
+                  <Link to={`/profile/${event.hostUid}`}>
+                    {" "}
+                    {event.hostedBy}
+                  </Link>
+                </Item.Description>
+                {event.cancelled && (
+                  <Label
+                    style={{ top: "-40px" }}
+                    ribbon="right"
+                    color="red"
+                    content="this event has been cancelled "
+                  />
+                )}
               </Item.Content>
             </Item>
           </Item.Group>
@@ -41,8 +62,11 @@ export default class EventListItem extends Component {
           <List horizontal>
             {event.attendees &&
               //we receive an object from firestore we should conver it to ana array
-              Object.values(event.attendees).map((attendee, index) => (
+              /*Object.values(event.attendees).map((attendee, index) => (
                 <EventsListAttendes key={index} attendee={attendee} />
+              ))*/
+              objectToArray(event.attendees).map((attendee) => (
+                <EventsListAttendes key={attendee.id} attendee={attendee} />
               ))}
           </List>
         </Segment>
@@ -57,14 +81,14 @@ export default class EventListItem extends Component {
             as={Link}
             to={`/events/${event.id}`}
           />
-          <Button
+          {/* <Button
             size="large"
             circular
             icon="trash alternate"
             basic
             floated="right"
             onClick={() => deletEvent(event.id)}
-          />
+          />*/}
         </Segment>
       </Segment.Group>
     );

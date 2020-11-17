@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default class SignedInMenu extends Component {
   render() {
-    const { signOut, profile } = this.props;
+    const { signOut, profile, auth } = this.props;
 
     return (
       <Fragment>
@@ -30,7 +30,12 @@ export default class SignedInMenu extends Component {
               <Dropdown.Item text="My Events" icon="calendar" />
               <Dropdown.Item text="My Network" icon="users" />
               <Dropdown.Item text="My activities" icon="list" />
-              <Dropdown.Item text="My Profile" icon="user" />
+              <Dropdown.Item
+                as={Link}
+                to={`/profile/${auth.uid}`}
+                text="My Profile"
+                icon="user"
+              />
               <Dropdown.Item
                 text="Settings"
                 icon="settings"

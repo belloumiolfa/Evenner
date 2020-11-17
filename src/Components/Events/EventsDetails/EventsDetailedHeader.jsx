@@ -2,7 +2,8 @@ import React from "react";
 
 import { Segment, Image, Item, Header, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
+import { Fragment } from "react";
 
 const eventImageStyle = {
   filter: "brightness(30%)",
@@ -16,13 +17,19 @@ const eventImageTextStyle = {
   height: "auto",
   color: "white",
 };
-
-const EventsDetailedHeader = ({ event, category }) => {
+const EventsDetailedHeader = ({
+  event,
+  isHost,
+  category,
+  isGoing,
+  goingToEvent,
+  cancelGoingToEvent,
+}) => {
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={require(`../../../Images/culture.jpg`)}
+          src={require(`../../../Images/food.jpg`)}
           fluid
           style={eventImageStyle}
         />
@@ -32,10 +39,19 @@ const EventsDetailedHeader = ({ event, category }) => {
             <Item>
               <Item.Content>
                 <Header size="huge" content="ddd" style={{ color: "white" }} />
-                <p>zzzzz</p>
-
                 <p>
-                  Hosted by <strong>zzzzz</strong>
+                  {event.date && format(event.date.toDate(), "EEEE do LLL")}
+                </p>
+                <p>
+                  Hosted by
+                  <strong>
+                    <Link
+                      to={`/profile/${event.hostUid}`}
+                      style={{ color: "white" }}
+                    >
+                      {event.hostedBy}
+                    </Link>
+                  </strong>
                 </p>
               </Item.Content>
             </Item>
@@ -43,24 +59,31 @@ const EventsDetailedHeader = ({ event, category }) => {
         </Segment>
       </Segment>
 
-      <Segment attached="bottom">
-        <Button circular color="grey">
-          Join
-        </Button>
-
-        <Button circular basic>
-          Cancel
-        </Button>
-
-        <Button
-          circular
-          color="grey"
-          floated="right"
-          as={Link}
-          to={`/manage/ghfdtyh`}
-        >
-          Manage Event
-        </Button>
+      <Segment attached="bottom" clearing>
+        {!isHost && (
+          <Fragment>
+            {isGoing ? (
+              <Button circular basic onClick={() => cancelGoingToEvent(event)}>
+                Cancel my place
+              </Button>
+            ) : (
+              <Button onClick={() => goingToEvent(event)} circular color="grey">
+                Join this event
+              </Button>
+            )}
+          </Fragment>
+        )}
+        {isHost && (
+          <Button
+            circular
+            color="grey"
+            floated="right"
+            as={Link}
+            to={`/manage/${event.id}`}
+          >
+            Manage Event
+          </Button>
+        )}
       </Segment>
     </Segment.Group>
   );
