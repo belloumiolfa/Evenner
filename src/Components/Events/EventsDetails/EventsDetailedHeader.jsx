@@ -4,6 +4,7 @@ import { Segment, Image, Item, Header, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { Fragment } from "react";
+import Loading from "../../../Layout/Loading";
 
 const eventImageStyle = {
   filter: "brightness(30%)",
@@ -29,7 +30,13 @@ const EventsDetailedHeader = ({
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={require(`../../../Images/food.jpg`)}
+          src={
+            event.category ? (
+              require(`../../../Images/${event.category}.jpg`)
+            ) : (
+              <Loading />
+            )
+          }
           fluid
           style={eventImageStyle}
         />

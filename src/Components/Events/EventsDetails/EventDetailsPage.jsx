@@ -65,7 +65,6 @@ class EventDetailsPage extends Component {
         <Grid.Column width={10}>
           <EventsDetailedHeader
             event={event}
-            category={event.category}
             isGoing={isGoing}
             isHost={isHost}
             goingToEvent={goingToEvent}

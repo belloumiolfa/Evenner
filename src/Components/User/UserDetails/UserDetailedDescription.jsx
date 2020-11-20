@@ -38,7 +38,7 @@ const UserDetailedDescription = ({ profile }) => {
                   ))}
               </List>
             ) : (
-              <spam>No interestes</spam>
+              <p>No interestes</p>
             )}
           </Grid.Column>
         </Grid>
