@@ -3,11 +3,10 @@ import { Form, Label } from "semantic-ui-react";
 
 const TextArea = ({
   input,
-  width,
   type,
   rows,
   placeholder,
-  meta: { touched, error }
+  meta: { touched, error },
 }) => {
   return (
     <Form.Field error={touched && !!error}>
